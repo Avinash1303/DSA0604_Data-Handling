@@ -1,0 +1,43 @@
+# Create the data frame
+productInventory <- data.frame(
+  product = c("Widget A", "Widget B", "Widget C", "Widget D"),
+  Quantity = c(100, 75, 120, 50),
+  price = c(10.00, 15.00, 8.50, 20.00)
+)
+
+# Create a bar chart for the Quantity of each product
+barplot(productInventory$Quantity, names.arg = productInventory$product, 
+        main = "Product Inventory", xlab = "Product", ylab = "Quantity", 
+        col = "skyblue", ylim = c(0, max(productInventory$Quantity) + 10))
+
+# Stacked bar chart
+library(ggplot2)
+
+# Create a stacked bar chart for the Quantity of each product
+ggplot(productInventory, aes(x = product, y = Quantity, fill = factor(price))) + 
+  geom_bar(stat = "identity") +
+  labs(title = "Product Inventory", x = "Product", y = "Quantity") 
+
+# Create a pie chart for the Quantity of each product
+total_quantity <- sum(productInventory$Quantity)
+pie(productInventory$Quantity / total_quantity, productInventory$product, main = "Product Inventory", xlab = "Quantity", ylab = "Product")
+legend("topright", c("India", "America", "Shri Lanka", "Nepal"), cex = 0.8,  
+fill = rainbow(length(x)))  
+
+# Install and load the plotrix package
+install.packages("plotrix")
+library(plotrix)
+
+# Create a 3D pie chart for the Quantity of the products
+pie3D(productInventory$Quantity, labels = productInventory$product, explode = 0.1, main = "Product Inventory")
+
+
+
+# Create a histogram for the Quantity of the products
+hist(productInventory$Quantity, main = "Product Inventory", xlab = "Quantity", ylab = "Frequency", col = "skyblue")
+
+# Create a line chart for the Quantity of the products
+plot(productInventory$Quantity, productInventory$price,type="o", main = "Product Inventory", xlab = "Quantity", ylab = "Price")
+
+# Create a scatter plot for the Quantity and Price of the products
+plot(productInventory$Quantity, productInventory$price, main = "Product Inventory", xlab = "Quantity", ylab = "Price")
